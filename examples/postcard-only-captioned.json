@@ -13,8 +13,8 @@
     [
       135,
       1164,
-      358,
-      1187
+      376,
+      1185
     ],
     [
       135,
@@ -23,5 +23,13 @@
       1236
     ]
   ],
-  "bytes": 2173073
+  "bytes": 2173782,
+  "caption_color_rgba": [
+    174,
+    126,
+    99,
+    255
+  ],
+  "caption_font": "LXGWWenKai-Regular.ttf",
+  "caption_font_sha256": "39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009"
 }

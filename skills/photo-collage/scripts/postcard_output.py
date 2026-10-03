@@ -12,6 +12,9 @@ try:
 except ImportError as error:
     raise SystemExit("Missing Pillow in this Python runtime; use an existing Pillow runtime or another verified deterministic compositor.") from error
 
+DEFAULT_CAPTION_FONT = Path(__file__).resolve().parents[1] / "assets/fonts/LXGWWenKai-Regular.ttf"
+CAPTION_COLOR = (174, 126, 99, 255)
+
 
 def load(path):
     with Image.open(path) as image:
@@ -34,8 +37,9 @@ def add_caption(card, labels, font_path):
     lines = [line for line in lines if line]
     if not lines:
         return []
-    if not font_path:
-        raise ValueError("Supplied captions require an existing font covering those characters; provide --font.")
+    font_path = Path(font_path) if font_path else DEFAULT_CAPTION_FONT
+    if not font_path.is_file():
+        raise ValueError("Caption font missing; restore the bundled OFL font or provide an existing --font covering every supplied character.")
     width, height = card.size
     x, y = round(width * 0.12), round(height * 0.83)
     max_width, max_height = round(width * 0.76), round(height * 0.13)
@@ -65,7 +69,7 @@ def add_caption(card, labels, font_path):
     boxes = []
     for index, line in enumerate(wrapped):
         position = (x, y + index * step)
-        draw.text(position, line, font=font, fill=(174, 126, 99, 255), anchor="lt")
+        draw.text(position, line, font=font, fill=CAPTION_COLOR, anchor="lt")
         boxes.append(list(draw.textbbox(position, line, font=font, anchor="lt")))
     return boxes
 
@@ -94,6 +98,10 @@ def compose(postcard, output, *, output_mode="postcard_only", original=None,
     master.save(output, format="PNG", compress_level=9)
     report = {"output_mode": output_mode, "size": list(master.size), "labels": labels,
               "caption_bounds": bounds, "bytes": output.stat().st_size}
+    if bounds:
+        caption_font = Path(font_path) if font_path else DEFAULT_CAPTION_FONT
+        report.update(caption_color_rgba=list(CAPTION_COLOR), caption_font=caption_font.name,
+                      caption_font_sha256=hashlib.sha256(caption_font.read_bytes()).hexdigest())
     if source:
         with Image.open(output) as saved:
             top = saved.crop((0, 0, source.width, source.height)).convert("RGBA")
@@ -131,7 +139,7 @@ def main():
     card.add_argument("--output-mode", choices=["postcard_only", "stacked_original"], default="postcard_only")
     for label in ["location", "date", "time"]:
         card.add_argument("--" + label, default="")
-    card.add_argument("--font", dest="font_path")
+    card.add_argument("--font", dest="font_path", help="Optional local font override; default is bundled OFL Chinese handwriting font LXGW WenKai.")
     small = commands.add_parser("preview")
     small.add_argument("--input", dest="input_path", required=True)
     small.add_argument("--width", type=int, default=560)

@@ -142,7 +142,7 @@
         560,
         700
       ],
-      "bytes": 28756,
+      "bytes": 28692,
       "quality": 86,
       "psnr_dB_vs_resized_master": 38.57
     },
@@ -153,9 +153,9 @@
         560,
         1400
       ],
-      "bytes": 167030,
+      "bytes": 167824,
       "quality": 86,
-      "psnr_dB_vs_resized_master": 36.01
+      "psnr_dB_vs_resized_master": 36.04
     }
   ],
   "readme_embedded_files": [
@@ -167,7 +167,7 @@
     "examples/previews/cobalt-night-grain.webp"
   ],
   "old_readme_bytes": 18880022,
-  "new_readme_bytes": 804288,
+  "new_readme_bytes": 805018,
   "reduction_percent": 95.74,
   "before_single_GET": {
     "path": "examples/input.png",
