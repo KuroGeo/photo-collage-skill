@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+.env*
+private-references/
+reference/
+.library-transfer/

@@ -1,0 +1,36 @@
+{
+  "created": "2026-10-03",
+  "tool": "Codex built-in image generation/editing",
+  "source_type": "Newly generated fictional demonstration; no third-party photo used for these files",
+  "input": {
+    "file": "input.png",
+    "prompt": "Create one original photorealistic travel snapshot, portrait 4:5. A fictional adult man, about 35, short curly dark brown hair, medium brown skin, mustard yellow rain jacket, dark navy trousers, charcoal hiking backpack, stands at the lower left on a mountain lakeside trail, looking toward camera with relaxed arms. His full body is visible. Alpine peaks with a little distant snow, olive green grassy slope, a dark bare tree branch at upper right, cobalt-blue lake and blue sky, a few warm distant cabin lights. Natural daytime phone photography, ordinary vacation photo composition, clear clothing and person details, no artistic filter, no collage, no paper texture, no lettering, no logo. Invent a person rather than resembling any public or supplied portrait. This image is a clearly labeled synthetic demonstration input for testing a photo editing workflow."
+  },
+  "outputs": [
+    {
+      "file": "drybrush-postcard.png",
+      "prompt": "Edit the supplied original synthetic travel photograph into ONE standalone portrait 4:5 image in the following selected style. Preserve the same fictional adult man's facial features, short curly hair, beard, mustard rain jacket, navy trousers, charcoal backpack, relaxed standing pose, and important environment relationships. Do not duplicate him. A tiny sparse flat drybrush travel postcard composition in the lower middle of warm white lightly fibrous paper. The entire scenery group occupies only 65 percent canvas width and 30 percent height; enormous unmarked paper margins. Simplified mountain fragments, a few olive and pale yellow brush strokes, a little muted blue lake. Flat matte print, broken brush edges, no thick paper relief. No lettering, date, location labels, logo, phone UI, social media UI, tutorial title or before-after panels. Opaque background. This is an independently generated synthetic demonstration, not a user portrait or a Kapi template."
+    },
+    {
+      "file": "blue-beige-torn.png",
+      "prompt": "Edit the supplied original synthetic travel photograph into ONE standalone portrait 4:5 image in the following selected style. Preserve the same fictional adult man's facial features, short curly hair, beard, mustard rain jacket, navy trousers, charcoal backpack, relaxed standing pose, and important environment relationships. Do not duplicate him. A photographic torn-paper collage on aged beige paper, with rich cobalt blue lake and sky fragments and the dark branch. Use one full-body main photo cutout and two smaller environment photo fragments, irregular ragged fibrous edges, asymmetric overlapping layers, light physical paper shadows, breathing space. Preserve photographic rather than painted person. No lettering, date, location labels, logo, phone UI, social media UI, tutorial title or before-after panels. Opaque background. This is an independently generated synthetic demonstration, not a user portrait or a Kapi template."
+    },
+    {
+      "file": "olive-nature-torn.png",
+      "prompt": "Edit the supplied original synthetic travel photograph into ONE standalone portrait 4:5 image in the following selected style. Preserve the same fictional adult man's facial features, short curly hair, beard, mustard rain jacket, navy trousers, charcoal backpack, relaxed standing pose, and important environment relationships. Do not duplicate him. An olive green nature photo collage. Cream paper margin, one slightly slanted main photograph preserving man and mountains and lake, smaller rocky trail and grassy environment fragments overlapping, rough fibrous tears, sparse olive brush strokes and one tiny blank cream ticket shape. Mild tactile paper shadows, retain photography. No lettering, date, location labels, logo, phone UI, social media UI, tutorial title or before-after panels. Opaque background. This is an independently generated synthetic demonstration, not a user portrait or a Kapi template."
+    },
+    {
+      "file": "alpine-mono-print.png",
+      "prompt": "Edit the supplied original synthetic travel photograph into ONE standalone portrait 4:5 image in the following selected style. Preserve the same fictional adult man's facial features, short curly hair, beard, mustard rain jacket, navy trousers, charcoal backpack, relaxed standing pose, and important environment relationships. Do not duplicate him. Warm white paper collage with the original snowy mountain silhouette rendered as broken charcoal and deep blue monochrome print blocks; one thin burnt orange accent line. Keep man as a recognizable photographic cutout with original mustard jacket, navy trousers, charcoal backpack. Strong negative space and flat print grain, sparse paper cracks, no extra snow or landscape. No lettering, date, location labels, logo, phone UI, social media UI, tutorial title or before-after panels. Opaque background. This is an independently generated synthetic demonstration, not a user portrait or a Kapi template."
+    },
+    {
+      "file": "cobalt-night-grain.png",
+      "prompt": "Edit the supplied original synthetic travel photograph into ONE standalone portrait 4:5 image in the following selected style. Preserve the same fictional adult man's facial features, short curly hair, beard, mustard rain jacket, navy trousers, charcoal backpack, relaxed standing pose, and important environment relationships. Do not duplicate him. Transform the scene into a cobalt and midnight blue photographic print collage, coarse analog grain, sparse cool light flecks and a few water-drop textures; keep the original man's skin, hair, jacket, trousers, backpack, pose and face recognizable, with mustard yellow jacket still readable. Modest overlapping photo fragments and blue-paper margin, original snowy lake landscape remains. Style color transformation to a blue dusk mood is authorized for this synthetic demo; no new props, no umbrellas, no new people. No lettering, date, location labels, logo, phone UI, social media UI, tutorial title or before-after panels. Opaque background. This is an independently generated synthetic demonstration, not a user portrait or a Kapi template."
+    }
+  ],
+  "limitations": [
+    "Generated fictional example, not a real-user identity benchmark.",
+    "Five modes were run with one input; no cross-photo consistency claim.",
+    "External service terms apply; MIT covers project text only."
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "file": "drybrush-postcard.png",
+    "input": "first-pass edit of the same synthetic input; original edit prompt is in provenance.json",
+    "prompt": "Keep the man and scene from this image but make the art far smaller and more sparse. All paint, person and landscape combined must fit within a small region no more than 45 percent of canvas WIDTH and 25 percent of canvas HEIGHT, centered horizontally at 65 percent down the paper. Large blank unmarked white paper everywhere else. Remove most landscape detail, keep a few isolated mountain and lake drybrush swatches, no whole dense mountain wall. Preserve same man, mustard jacket, charcoal backpack, navy trousers and relaxed pose at smaller scale. Flat lightly fibrous paper, muted sage and pale blue broken drybrush print. No lettering."
+  },
+  {
+    "file": "blue-beige-torn.png",
+    "input": "first-pass edit of the same synthetic input; original edit prompt is in provenance.json",
+    "prompt": "Refine this into a flat deconstructed artistic paper collage, with much less generic scrapbook framing. Keep same man's face, curly hair, beard, jacket, backpack, trousers, pose. Main man/photo occupies about left third. Large beige unmarked paper openings between photo fragments. Retain cobalt sky and lake in irregular openings and dark photographic branch; make selected mountain/treetop edges dissolve into rough olive/dark drybrush print silhouettes directly on paper. Mixed photographic fragments and flat printed texture. Reduce thick bright white borders and relief shadows substantially, avoid three rectangular framed full photos. Some raw fibrous tears, sparse brush streaks. No lettering."
+  },
+  {
+    "file": "olive-nature-torn.png",
+    "input": "first-pass edit of the same synthetic input; original edit prompt is in provenance.json",
+    "prompt": "Refine this into a flat deconstructed nature paper collage matching olive grass/cream paper/blue brush print. Preserve same man's face, hair, mustard jacket, charcoal backpack, navy trousers and relaxed stance. Remove the decorative leaves and all added botanical props. Keep a single angled main man photograph at left, opening onto the grass and lake, with torn cream edges that dissolve into olive brushprint on paper rather than identical rectangular frames. Replace the three small left stacked photo rectangles with one olive textured grass band and one very sparse blue sky drybrush patch. Blank cream ticket allowed, but no text. Greatly reduce relief shadows, preserve breathing space, matte print grain and irregular paper fibers."
+  }
+]
