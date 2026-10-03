@@ -1,0 +1,2 @@
+# Only for the optional deterministic composition/preview helper.
+Pillow>=10

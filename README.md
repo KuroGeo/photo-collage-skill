@@ -6,15 +6,23 @@
 
 ## 实际示例
 
-下面的输入是本项目新生成的虚构旅行照片，五张输出由同一输入分别编辑而来。它们演示配方的区别，不代表对任意真实人像都能保持完全一致。没有转载抖音作者照片。
+下面使用本项目生成的[虚构旅行原图（高清）](examples/input.png)。五款风格由同一输入实际编辑而来；没有转载抖音作者照片。页面加载 560 像素宽的 WebP 预览，点击图片可查看无损 PNG 母版。
 
-| 合成演示输入 | 留白干刷明信片 | 蓝米撕纸 |
-|---|---|---|
-| ![synthetic source](examples/input.png) | ![drybrush](examples/drybrush-postcard.png) | ![blue beige](examples/blue-beige-torn.png) |
+明信片支持两种最终形态。示例文字是明确传入的演示参数：`location=合成山湖`、`date=2026.10.03`、`time=17:30`，不代表实际拍摄地点时间。日期/时间与下一行地点排在卡片左下。
 
-| 橄榄绿自然拼贴 | 雪山单色印刷 | 深蓝夜景颗粒 |
-|---|---|---|
-| ![olive](examples/olive-nature-torn.png) | ![alpine](examples/alpine-mono-print.png) | ![cobalt](examples/cobalt-night-grain.png) |
+| 单独明信片 `postcard_only` | 上原图、下明信片 `stacked_original` |
+|---|---|
+| [![单独明信片预览](examples/previews/postcard-only-captioned.webp)](examples/postcard-only-captioned.png) | [![上下拼接预览](examples/previews/postcard-stacked-captioned.webp)](examples/postcard-stacked-captioned.png) |
+
+上下整图通过确定性合成完成，上方原片的无损像素与输入一致；最终整体比例随原片和卡片尺寸变化，不把原片拉伸到固定比例。下方生成图仍可能重绘细节。[无字卡片高清](examples/drybrush-postcard.png)。
+
+| 蓝米撕纸 | 橄榄绿自然拼贴 |
+|---|---|
+| [![蓝米预览](examples/previews/blue-beige-torn.webp)](examples/blue-beige-torn.png) | [![橄榄绿预览](examples/previews/olive-nature-torn.webp)](examples/olive-nature-torn.png) |
+
+| 雪山单色印刷 | 深蓝夜景颗粒 |
+|---|---|
+| [![雪山预览](examples/previews/alpine-mono-print.webp)](examples/alpine-mono-print.png) | [![深蓝预览](examples/previews/cobalt-night-grain.webp)](examples/cobalt-night-grain.png) |
 
 ## 三步使用
 
@@ -23,6 +31,15 @@
 3. 直接调用：`用 $photo-collage 把这张照片做成 blue-beige-torn，4:5，保留我的衣服和脸，不加文字。`
 
 其他可选名：`drybrush-postcard`、`olive-nature-torn`、`alpine-mono-print`、`cobalt-night-grain`。也可自然表达“用这张原片做米蓝色撕纸拼贴”；保留默认自动发现，无需修改系统权限。
+
+明信片调用示例：
+
+```text
+用 $photo-collage 做 drybrush-postcard，output_mode=postcard_only，不加文字。
+用 $photo-collage 做 drybrush-postcard，output_mode=stacked_original，location=杭州，date=2026.10.03，time=17:30。
+```
+
+`output_mode` 默认 `postcard_only`；`location`、`date`、`time` 均可省略，省略项不添加。不要猜测地点时间或自动公开 EXIF 信息。文字、拼接和预览由确定性工具后处理；附带的辅助脚本需要已有 Python + Pillow 和覆盖文字语言的本地字体，缺少时会说明依赖。无需给图像工具增加 API key。[后处理步骤与命令](skills/photo-collage/references/postcard-output.md)。
 
 ## 能力与边界
 
@@ -40,6 +57,8 @@
 结构校验和场景干跑会验证缺图、缺工具、UI 排除与输入角色规则。当前会话不能热加载新装技能；已验证文件安装，不把自然语言自动发现写成已实测成功。新会话仍需实际调用确认。生成式编辑也可能改变脸部与衣服细节，重要纪念照片建议逐张检查。
 
 示例包含生成式重绘及少量新增装饰；提示词的尺寸和元素约束不能视为工具必定严格遵守。完整检查结论见 [验证记录](docs/validation.md)。
+
+展示图片由原先六张高清 PNG 的 **18.88 MB** 降为六张 WebP 预览的 **0.80 MB**，减少 **95.74%**。高清文件保留；这只是展示资源体积变化，不能承诺所有网络环境的页面耗时。[压缩、双模式与原片一致性实测](docs/output-validation.md)。
 
 ## 许可
 

@@ -1,0 +1,180 @@
+{
+  "tool": "Pillow 12.3.0, deterministic Lanczos resize + WebP quality 86 method 6",
+  "before": [
+    {
+      "file": "examples/input.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 3215728,
+      "sha256": "88c25570d88ee4c0706f68b2c7015f9a722c65d5bf1ab96978b94f815563d7be",
+      "unchanged_from_previous_commit": true
+    },
+    {
+      "file": "examples/drybrush-postcard.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 2005317,
+      "sha256": "389a8ac50a3ff52c68d5ab93eece300bb9b4c279a9a9d7bd1172f478459c4ec0",
+      "unchanged_from_previous_commit": true
+    },
+    {
+      "file": "examples/blue-beige-torn.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 3509378,
+      "sha256": "d8447bcc8335a0210be568167c9766086b3728d08e175c29e06960c7899658be",
+      "unchanged_from_previous_commit": true
+    },
+    {
+      "file": "examples/olive-nature-torn.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 3277400,
+      "sha256": "a6063118edef03db206abfcd599ede7d35020d671b08ee280e7a4130cbcda2d4",
+      "unchanged_from_previous_commit": true
+    },
+    {
+      "file": "examples/alpine-mono-print.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 3385713,
+      "sha256": "79910153f0c47df94e3aa1109e4ec5f7113178afcd70d2a0e82a9460e1491811",
+      "unchanged_from_previous_commit": true
+    },
+    {
+      "file": "examples/cobalt-night-grain.png",
+      "format": "PNG",
+      "size": [
+        1122,
+        1402
+      ],
+      "bytes": 3486486,
+      "sha256": "854609d3ba3296decea3f729e5980f3deb73eac8e2b96c9346ceabb14db03d3b",
+      "unchanged_from_previous_commit": true
+    }
+  ],
+  "previews": [
+    {
+      "file": "examples/previews/alpine-mono-print.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 144474,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 32.22
+    },
+    {
+      "file": "examples/previews/blue-beige-torn.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 169046,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 30.7
+    },
+    {
+      "file": "examples/previews/cobalt-night-grain.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 153534,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 33.95
+    },
+    {
+      "file": "examples/previews/drybrush-postcard.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 27680,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 38.71
+    },
+    {
+      "file": "examples/previews/input.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 144214,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 34.85
+    },
+    {
+      "file": "examples/previews/olive-nature-torn.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 141448,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 32.79
+    },
+    {
+      "file": "examples/previews/postcard-only-captioned.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 28756,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 38.57
+    },
+    {
+      "file": "examples/previews/postcard-stacked-captioned.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        1400
+      ],
+      "bytes": 167030,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 36.01
+    }
+  ],
+  "readme_embedded_files": [
+    "examples/previews/postcard-only-captioned.webp",
+    "examples/previews/postcard-stacked-captioned.webp",
+    "examples/previews/blue-beige-torn.webp",
+    "examples/previews/olive-nature-torn.webp",
+    "examples/previews/alpine-mono-print.webp",
+    "examples/previews/cobalt-night-grain.webp"
+  ],
+  "old_readme_bytes": 18880022,
+  "new_readme_bytes": 804288,
+  "reduction_percent": 95.74,
+  "before_single_GET": {
+    "path": "examples/input.png",
+    "bytes": 3215728,
+    "seconds": 2.093158,
+    "http": 200,
+    "final_host": "raw.githubusercontent.com"
+  },
+  "timing_limit": "Single GET observation, not a full-page benchmark or guaranteed future latency."
+}
