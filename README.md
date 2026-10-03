@@ -14,6 +14,10 @@
 |---|---|
 | [![单独明信片预览](examples/previews/postcard-only-handwritten.webp)](examples/postcard-only-handwritten.png) | [![上下拼接预览](examples/previews/postcard-stacked-handwritten.webp)](examples/postcard-stacked-handwritten.png) |
 
+新版左下标注的放大局部（裁自上面的实际成片）：
+
+[![新版自然手写标注放大](examples/previews/handwritten-caption-detail.webp)](examples/handwritten-caption-detail.png)
+
 上下整图通过确定性合成完成，上方原片的无损像素与输入一致；最终整体比例随原片和卡片尺寸变化，不把原片拉伸到固定比例。下方生成图仍可能重绘细节。[无字卡片高清](examples/drybrush-postcard.png)。
 
 | 蓝米撕纸 | 橄榄绿自然拼贴 |
@@ -68,7 +72,7 @@
 
 示例包含生成式重绘及少量新增装饰；提示词的尺寸和元素约束不能视为工具必定严格遵守。完整检查结论见 [验证记录](docs/validation.md)。
 
-展示图片由原先六张高清 PNG 的 **18.88 MB** 降为六张 WebP 预览的 **0.80 MB**，减少 **95.74%**。高清文件保留；这只是展示资源体积变化，不能承诺所有网络环境的页面耗时。[压缩、双模式与原片一致性实测](docs/output-validation.md)。
+展示图片由原先六张高清 PNG 的 **18.88 MB** 改为六张整图加一张标注局部预览，合计 **0.82 MB**，减少 **95.68%**。高清文件保留；这只是展示资源体积变化，不能承诺所有网络环境的页面耗时。[压缩、双模式与原片一致性实测](docs/output-validation.md)。
 
 [线上旧字与新手写实际对比](examples/handwriting-before-after.png)。字体修正见 [根因与实测](docs/handwriting-validation.md)：只改文字区域，主体画面、暖棕色和原文保持。
 

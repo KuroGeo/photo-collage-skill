@@ -178,6 +178,22 @@
       "bytes": 167736,
       "quality": 86,
       "psnr_dB_vs_resized_master": 36.05
+    },
+    {
+      "file": "examples/previews/handwritten-caption-detail.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        159
+      ],
+      "bytes": 11284,
+      "quality": 86,
+      "source_crop": [
+        100,
+        1120,
+        700,
+        1290
+      ]
     }
   ],
   "readme_embedded_files": [
@@ -186,11 +202,12 @@
     "examples/previews/blue-beige-torn.webp",
     "examples/previews/olive-nature-torn.webp",
     "examples/previews/alpine-mono-print.webp",
-    "examples/previews/cobalt-night-grain.webp"
+    "examples/previews/cobalt-night-grain.webp",
+    "examples/previews/handwritten-caption-detail.webp"
   ],
   "old_readme_bytes": 18880022,
-  "new_readme_bytes": 804878,
-  "reduction_percent": 95.74,
+  "new_readme_bytes": 816162,
+  "reduction_percent": 95.68,
   "before_single_GET": {
     "path": "examples/input.png",
     "bytes": 3215728,
