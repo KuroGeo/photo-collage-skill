@@ -156,18 +156,40 @@
       "bytes": 167824,
       "quality": 86,
       "psnr_dB_vs_resized_master": 36.04
+    },
+    {
+      "file": "examples/previews/postcard-only-handwritten.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        700
+      ],
+      "bytes": 28640,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 38.6
+    },
+    {
+      "file": "examples/previews/postcard-stacked-handwritten.webp",
+      "format": "WebP",
+      "size": [
+        560,
+        1400
+      ],
+      "bytes": 167736,
+      "quality": 86,
+      "psnr_dB_vs_resized_master": 36.05
     }
   ],
   "readme_embedded_files": [
-    "examples/previews/postcard-only-captioned.webp",
-    "examples/previews/postcard-stacked-captioned.webp",
+    "examples/previews/postcard-only-handwritten.webp",
+    "examples/previews/postcard-stacked-handwritten.webp",
     "examples/previews/blue-beige-torn.webp",
     "examples/previews/olive-nature-torn.webp",
     "examples/previews/alpine-mono-print.webp",
     "examples/previews/cobalt-night-grain.webp"
   ],
   "old_readme_bytes": 18880022,
-  "new_readme_bytes": 805018,
+  "new_readme_bytes": 804878,
   "reduction_percent": 95.74,
   "before_single_GET": {
     "path": "examples/input.png",

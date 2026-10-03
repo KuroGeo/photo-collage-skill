@@ -8,11 +8,11 @@
 
 下面使用本项目生成的[虚构旅行原图（高清）](examples/input.png)。五款风格由同一输入实际编辑而来；没有转载抖音作者照片。页面加载 560 像素宽的 WebP 预览，点击图片可查看无损 PNG 母版。
 
-明信片支持两种最终形态。示例文字是明确传入的演示参数：`location=合成山湖`、`date=2026.10.03`、`time=17:30`，不代表实际拍摄地点时间。日期/时间与下一行地点以中文手写字体霞鹜文楷排在卡片左下，保留暖棕色 `#AE7E63`。
+明信片支持两种最终形态。示例文字是明确传入的演示参数：`location=合成山湖`、`date=2026.10.03`、`time=17:30`，不代表实际拍摄地点时间。日期/时间与下一行地点以中文悠哉、英文/数字 Caveat 两种明确选择的手写字体排在卡片左下，保留暖棕色 `#AE7E63`。
 
 | 单独明信片 `postcard_only` | 上原图、下明信片 `stacked_original` |
 |---|---|
-| [![单独明信片预览](examples/previews/postcard-only-captioned.webp)](examples/postcard-only-captioned.png) | [![上下拼接预览](examples/previews/postcard-stacked-captioned.webp)](examples/postcard-stacked-captioned.png) |
+| [![单独明信片预览](examples/previews/postcard-only-handwritten.webp)](examples/postcard-only-handwritten.png) | [![上下拼接预览](examples/previews/postcard-stacked-handwritten.webp)](examples/postcard-stacked-handwritten.png) |
 
 上下整图通过确定性合成完成，上方原片的无损像素与输入一致；最终整体比例随原片和卡片尺寸变化，不把原片拉伸到固定比例。下方生成图仍可能重绘细节。[无字卡片高清](examples/drybrush-postcard.png)。
 
@@ -39,7 +39,7 @@
 用 $photo-collage 做 drybrush-postcard，output_mode=stacked_original，location=杭州，date=2026.10.03，time=17:30。
 ```
 
-`output_mode` 默认 `postcard_only`；`location`、`date`、`time` 均可省略，省略项不添加。不要猜测地点时间或自动公开 EXIF 信息。文字、拼接和预览由确定性工具后处理；附带的辅助脚本需要已有 Python + Pillow；中文手写字体已随 Skill 附带，中文、英文和数字使用同一字体，缺字时报错。无需给图像工具增加 API key。[后处理步骤与命令](skills/photo-collage/references/postcard-output.md)。
+`output_mode` 默认 `postcard_only`；`location`、`date`、`time` 均可省略，省略项不添加。不要猜测地点时间或自动公开 EXIF 信息。文字、拼接和预览由确定性工具后处理；附带的辅助脚本需要已有 Python + Pillow；中文手写字体已随 Skill 附带，中文使用悠哉，英文和数字使用 Caveat，均为明确选择的手写字体，不使用系统回退，缺字时报错。无需给图像工具增加 API key。[后处理步骤与命令](skills/photo-collage/references/postcard-output.md)。
 
 ## 能力与边界
 
@@ -70,10 +70,10 @@
 
 展示图片由原先六张高清 PNG 的 **18.88 MB** 降为六张 WebP 预览的 **0.80 MB**，减少 **95.74%**。高清文件保留；这只是展示资源体积变化，不能承诺所有网络环境的页面耗时。[压缩、双模式与原片一致性实测](docs/output-validation.md)。
 
-字体修正见 [实际效果与独立验证](docs/handwriting-validation.md)：只改文字区域，主体画面、暖棕色和原文保持。
+[线上旧字与新手写实际对比](examples/handwriting-before-after.png)。字体修正见 [根因与实测](docs/handwriting-validation.md)：只改文字区域，主体画面、暖棕色和原文保持。
 
 ## 许可
 
 本项目原创 Skill 文本和文档使用 [MIT](LICENSE)。示例是本项目通过 Codex 图像工具新生成的演示素材，生成来源记录于 [examples/provenance.md](examples/provenance.md)；它们不属于 Kapi 或抖音作者素材。MIT 不为所调用的图像服务、模型或第三方照片授予许可，使用时仍遵循该服务条款与素材权限。
 
-附带的未修改霞鹜文楷 Regular 1.522 使用 [SIL Open Font License 1.1](skills/photo-collage/assets/fonts/OFL.txt)，保留原版权；该字体不适用本项目 MIT。来源和文件哈希见 [字体记录](skills/photo-collage/assets/fonts/provenance.json)。字体约 25.58 MB，仅随技能下载，README 仍加载图片预览。
+附带的未修改字体为悠哉 Regular 0.868 和 Caveat 2.000，分别保留完整 [悠哉 OFL](skills/photo-collage/assets/fonts/Yozai-OFL.txt)、[Caveat OFL](skills/photo-collage/assets/fonts/Caveat-OFL.txt)与原版权，均不适用本项目 MIT。来源和哈希见 [字体记录](skills/photo-collage/assets/fonts/provenance.json)。两份字体合计约 16.01 MB，仅随技能下载，README 仍加载图片预览。

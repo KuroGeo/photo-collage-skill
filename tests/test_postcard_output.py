@@ -81,7 +81,8 @@ class PostcardOutputTests(unittest.TestCase):
         report = helper.compose(self.card, out, **labels)
         self.assertEqual(report["labels"], labels)
         self.assertEqual(report["caption_color_rgba"], [174, 126, 99, 255])
-        self.assertEqual(report["caption_font"], "LXGWWenKai-Regular.ttf")
+        self.assertEqual(report["caption_font"], "Yozai-Regular.ttf")
+        self.assertEqual(report["caption_fonts"], ["Yozai-Regular.ttf", "Caveat.ttf"])
         self.assertGreaterEqual(len(report["caption_bounds"]), 3)
         with Image.open(out) as result:
             self.assertGreater(result.tobytes().count(bytes([174, 126, 99, 255])), 0)

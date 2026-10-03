@@ -9,3 +9,5 @@
 后续增加的 `postcard-only-captioned.png`、`postcard-stacked-captioned.png` 使用上述无字卡片，确定性排入演示参数“2026.10.03 17:30”“合成山湖”，后者再将 `input.png` 的原始显示像素粘贴到上方。没有重新生图；原高清输入与五款输出未覆盖。两个同名 JSON 记录文字、边界框和原片像素哈希；报告不包含 EXIF 地点或机器路径。`previews/*.webp` 是保留母版后派生的缩放压缩文件，不能用于像素级原片保真证明。
 
 日期、时间和地点后续按用户要求改用附带霞鹜文楷 Regular 1.522 手写字形；字面、暖棕色和主体布局保持。只更新两张含字母版及其预览，没有重新生图。字体使用 OFL 1.1，独立许可随 Skill 保存；验证见 [handwriting-validation.md](../docs/handwriting-validation.md)。
+
+用户反馈文楷太规整后，实际下载公开 README 的上一版预览与高清图，哈希确认已更新；因此修正字体审美。新增 `postcard-only-handwritten.png`、`postcard-stacked-handwritten.png` 及对应预览：中文明确用悠哉，英文/数字明确用 Caveat，无系统回退。`handwriting-before-after.png` 上部取实际线上旧图，下部取新排字，是同一区域放大的真实对比。没有生图，原文、位置和暖棕色保持；原六 PNG 与上一版含字图均保留。

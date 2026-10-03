@@ -1,12 +1,27 @@
 {
-  "family": "LXGW WenKai",
-  "file": "LXGWWenKai-Regular.ttf",
-  "version": "1.522; March 17, 2026",
-  "source": "https://github.com/lxgw/LxgwWenKai/blob/main/fonts/TTF/LXGWWenKai-Regular.ttf",
-  "license": "SIL Open Font License 1.1",
-  "license_file": "OFL.txt",
-  "downloaded": "2026-10-03",
-  "sha256": "39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009",
-  "bytes": 25575676,
-  "modified": false
+  "fonts": [
+    {
+      "file": "Yozai-Regular.ttf",
+      "source": "https://github.com/lxgw/yozai-font/releases/tag/v0.868",
+      "version": "Version 0.868;September 12, 2025",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "Yozai-OFL.txt",
+      "downloaded": "2026-10-03",
+      "modified": false,
+      "bytes": 15605374,
+      "sha256": "25071998a0fe6a72f54c235e714986d259633e5ff670b1a2b5e264387f3316ac"
+    },
+    {
+      "file": "Caveat.ttf",
+      "source": "https://github.com/google/fonts/tree/main/ofl/caveat",
+      "version": "Version 2.000",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "Caveat-OFL.txt",
+      "downloaded": "2026-10-03",
+      "modified": false,
+      "bytes": 403648,
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988"
+    }
+  ],
+  "routing": "Yozai for Chinese; Caveat for Latin letters and digits; no system fallback"
 }

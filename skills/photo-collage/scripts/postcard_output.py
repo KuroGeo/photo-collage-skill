@@ -5,6 +5,7 @@ Requires an existing Python + Pillow runtime. Never calls a model or reads GPS.
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 try:
@@ -12,7 +13,8 @@ try:
 except ImportError as error:
     raise SystemExit("Missing Pillow in this Python runtime; use an existing Pillow runtime or another verified deterministic compositor.") from error
 
-DEFAULT_CAPTION_FONT = Path(__file__).resolve().parents[1] / "assets/fonts/LXGWWenKai-Regular.ttf"
+DEFAULT_CAPTION_FONT = Path(__file__).resolve().parents[1] / "assets/fonts/Yozai-Regular.ttf"
+DEFAULT_LATIN_FONT = Path(__file__).resolve().parents[1] / "assets/fonts/Caveat.ttf"
 CAPTION_COLOR = (174, 126, 99, 255)
 
 
@@ -32,45 +34,79 @@ def destination(output, inputs):
     return output
 
 
+def caption_font_paths(font_path):
+    return [Path(font_path)] if font_path else [DEFAULT_CAPTION_FONT, DEFAULT_LATIN_FONT]
+
+
 def add_caption(card, labels, font_path):
     lines = [" ".join(value for value in [labels["date"], labels["time"]] if value), labels["location"]]
     lines = [line for line in lines if line]
     if not lines:
         return []
-    font_path = Path(font_path) if font_path else DEFAULT_CAPTION_FONT
-    if not font_path.is_file():
-        raise ValueError("Caption font missing; restore the bundled OFL font or provide an existing --font covering every supplied character.")
+    paths = caption_font_paths(font_path)
+    if not all(path.is_file() for path in paths):
+        raise ValueError("Caption font missing; restore bundled OFL fonts or provide an existing --font covering every supplied character.")
     width, height = card.size
     x, y = round(width * 0.12), round(height * 0.83)
     max_width, max_height = round(width * 0.76), round(height * 0.13)
     draw = ImageDraw.Draw(card)
+
+    def runs(text, fonts):
+        result = []
+        for char in text:
+            # Explicit handwriting families, never system font fallback.
+            index = 1 if not font_path and ord(char) <= 0x024F else 0
+            if result and result[-1][1] == index:
+                result[-1] = (result[-1][0] + char, index)
+            else:
+                result.append((char, index))
+        return [(text, fonts[index]) for text, index in result]
+
     for size in range(max(8, round(width * 0.025)), 5, -1):
-        font = ImageFont.truetype(str(font_path), size=size)
+        fonts = [ImageFont.truetype(str(paths[0]), size=size)]
+        if not font_path:
+            fonts.append(ImageFont.truetype(str(paths[1]), size=round(size * 1.15)))
+        def length(text):
+            return sum(draw.textlength(run, font=font) for run, font in runs(text, fonts))
         wrapped = []
         for value in lines:
             for paragraph in value.split("\n"):
                 line = ""
-                for char in paragraph:
-                    if line and draw.textlength(line + char, font=font) > max_width:
-                        wrapped.append(line)
-                        line = ""
-                    line += char
+                # Keep ordinary Latin words together; only split a word that
+                # cannot fit on an otherwise empty line.
+                for token in re.findall(r"[A-Za-z]+(?:['’-][A-Za-z]+)*|.", paragraph):
+                    pieces = list(token) if length(token) > max_width else [token]
+                    for piece in pieces:
+                        if line and length(line + piece) > max_width:
+                            wrapped.append(line)
+                            line = ""
+                        line += piece
                 wrapped.append(line)
         step = round(size * 1.6)
         if len(wrapped) * step <= max_height:
             break
     else:
         raise ValueError("Caption does not fit without becoming unreadable; shorten it or choose a larger card.")
-    missing = font.getmask(chr(0x10FFFF))
-    for char in set("".join(lines)):
-        glyph = font.getmask(char)
-        if not char.isspace() and glyph.size == missing.size and bytes(glyph) == bytes(missing):
-            raise ValueError("Font lacks a supplied character; select a font with matching language coverage.")
+    for text, font in runs("".join(lines), fonts):
+        missing = font.getmask(chr(0x10FFFF))
+        for char in set(text):
+            glyph = font.getmask(char)
+            if not char.isspace() and glyph.size == missing.size and bytes(glyph) == bytes(missing):
+                raise ValueError("Font lacks a supplied character; supply a covering handwriting font; no fallback is applied.")
     boxes = []
     for index, line in enumerate(wrapped):
-        position = (x, y + index * step)
-        draw.text(position, line, font=font, fill=CAPTION_COLOR, anchor="lt")
-        boxes.append(list(draw.textbbox(position, line, font=font, anchor="lt")))
+        segments = runs(line, fonts)
+        top_offset = min((draw.textbbox((0, 0), text, font=font, anchor="ls")[1] for text, font in segments), default=0)
+        baseline = y + index * step - top_offset
+        cursor = x
+        run_boxes = []
+        for text, font in segments:
+            position = (cursor, baseline)
+            draw.text(position, text, font=font, fill=CAPTION_COLOR, anchor="ls")
+            run_boxes.append(draw.textbbox(position, text, font=font, anchor="ls"))
+            cursor += draw.textlength(text, font=font)
+        if run_boxes:
+            boxes.append([min(b[0] for b in run_boxes), min(b[1] for b in run_boxes), max(b[2] for b in run_boxes), max(b[3] for b in run_boxes)])
     return boxes
 
 
@@ -99,9 +135,12 @@ def compose(postcard, output, *, output_mode="postcard_only", original=None,
     report = {"output_mode": output_mode, "size": list(master.size), "labels": labels,
               "caption_bounds": bounds, "bytes": output.stat().st_size}
     if bounds:
-        caption_font = Path(font_path) if font_path else DEFAULT_CAPTION_FONT
-        report.update(caption_color_rgba=list(CAPTION_COLOR), caption_font=caption_font.name,
-                      caption_font_sha256=hashlib.sha256(caption_font.read_bytes()).hexdigest())
+        paths = caption_font_paths(font_path)
+        report.update(caption_color_rgba=list(CAPTION_COLOR), caption_font=paths[0].name,
+                      caption_font_sha256=hashlib.sha256(paths[0].read_bytes()).hexdigest(),
+                      caption_fonts=[path.name for path in paths],
+                      caption_font_hashes={path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in paths},
+                      caption_font_routing="explicit override" if font_path else "Yozai Chinese; Caveat Latin/digits; no system fallback")
     if source:
         with Image.open(output) as saved:
             top = saved.crop((0, 0, source.width, source.height)).convert("RGBA")
@@ -139,7 +178,7 @@ def main():
     card.add_argument("--output-mode", choices=["postcard_only", "stacked_original"], default="postcard_only")
     for label in ["location", "date", "time"]:
         card.add_argument("--" + label, default="")
-    card.add_argument("--font", dest="font_path", help="Optional local font override; default is bundled OFL Chinese handwriting font LXGW WenKai.")
+    card.add_argument("--font", dest="font_path", help="Optional local font override; default is bundled OFL Chinese handwriting fonts Yozai (Chinese) and Caveat (Latin/digits).")
     small = commands.add_parser("preview")
     small.add_argument("--input", dest="input_path", required=True)
     small.add_argument("--width", type=int, default=560)

@@ -1,0 +1,44 @@
+{
+  "output_mode": "postcard_only",
+  "size": [
+    1122,
+    1402
+  ],
+  "labels": {
+    "date": "2026.10.03",
+    "time": "17:30",
+    "location": "合成山湖"
+  },
+  "caption_bounds": [
+    [
+      135,
+      1164,
+      331,
+      1184
+    ],
+    [
+      135,
+      1209,
+      247,
+      1235
+    ]
+  ],
+  "bytes": 2173516,
+  "caption_color_rgba": [
+    174,
+    126,
+    99,
+    255
+  ],
+  "caption_font": "Yozai-Regular.ttf",
+  "caption_font_sha256": "25071998a0fe6a72f54c235e714986d259633e5ff670b1a2b5e264387f3316ac",
+  "caption_fonts": [
+    "Yozai-Regular.ttf",
+    "Caveat.ttf"
+  ],
+  "caption_font_hashes": {
+    "Yozai-Regular.ttf": "25071998a0fe6a72f54c235e714986d259633e5ff670b1a2b5e264387f3316ac",
+    "Caveat.ttf": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988"
+  },
+  "caption_font_routing": "Yozai Chinese; Caveat Latin/digits; no system fallback"
+}
