@@ -1,83 +1,110 @@
 # Photo Collage Skill
 
-把授权照片做成撕纸拼贴和旅行印刷明信片，可在 Codex 中用一句话调用。
+<p align="center">
+  <img src="assets/readme/hero.svg" width="100%" alt="一张照片，五种纸上风格：在 Codex 中制作撕纸拼贴与旅行印刷明信片。">
+</p>
 
-**致敬 Kapi 照片创作体验的独立 remake，非官方、无关联，不包含其代码/模型/模板。** 开源的是 Skill 与工作流程；图像由当前 Codex 环境实际提供的图像编辑能力生成。
+把你有权编辑的照片做成**撕纸拼贴或旅行印刷明信片**，在 Codex 中用一句话调用。五种配方、两种明信片交付形态，可选地点与日期手写标注。
 
-## 实际示例
+[看效果](#从一张照片出发) · [开始使用](#三步开始) · [明信片参数](#明信片两种交付形态) · [使用边界](#能力与边界)
 
-下面使用本项目生成的[虚构旅行原图（高清）](examples/input.png)。五款风格由同一输入实际编辑而来；没有转载抖音作者照片。页面加载 560 像素宽的 WebP 预览，点击图片可查看无损 PNG 母版。
+## 从一张照片出发
 
-明信片支持两种最终形态。示例文字是明确传入的演示参数：`location=合成山湖`、`date=2026.10.03`、`time=17:30`，不代表实际拍摄地点时间。日期/时间与下一行地点以中文悠哉、英文/数字 Caveat 两种明确选择的手写字体排在卡片左下，保留暖棕色 `#AE7E63`。
+同一张合成演示原片，换一种纸张、布局和印刷质感。点击图片查看 PNG 母版。
 
-| 单独明信片 `postcard_only` | 上原图、下明信片 `stacked_original` |
-|---|---|
-| [![单独明信片预览](examples/previews/postcard-only-handwritten.webp)](examples/postcard-only-handwritten.png) | [![上下拼接预览](examples/previews/postcard-stacked-handwritten.webp)](examples/postcard-stacked-handwritten.png) |
+| 合成演示原片 | 蓝米撕纸 · `blue-beige-torn` |
+| --- | --- |
+| [![合成演示原片：黄衣旅行者站在山湖旁](examples/previews/input.webp)](examples/input.png) | [![同一输入的蓝米撕纸输出：米色纸、蓝色天空与错位照片层](examples/previews/blue-beige-torn.webp)](examples/blue-beige-torn.png) |
 
-新版左下标注的放大局部（裁自上面的实际成片）：
+输入是本项目生成的**虚构人物与旅行场景**，五款输出由它实际编辑而来，不是用户实拍，也没有转载抖音作者照片。页面使用 560 像素宽 WebP 预览，高清 PNG 单独保留；生成卡片仍可能重绘脸部、衣服和场景细节。
 
-[![新版自然手写标注放大](examples/previews/handwritten-caption-detail.webp)](examples/handwritten-caption-detail.png)
+致敬 **Kapi 照片创作体验**的独立 remake，非官方、无关联，不包含其代码、模型或模板。本仓库提供 Skill 与工作流程；图像编辑由当前环境实际提供的工具完成。
 
-上下整图通过确定性合成完成，上方原片的无损像素与输入一致；最终整体比例随原片和卡片尺寸变化，不把原片拉伸到固定比例。下方生成图仍可能重绘细节。[无字卡片高清](examples/drybrush-postcard.png)。
+| 橄榄绿自然拼贴 · `olive-nature-torn` | 雪山单色印刷 · `alpine-mono-print` |
+| --- | --- |
+| [![橄榄绿自然拼贴：奶油纸面、绿色印刷块与照片碎片](examples/previews/olive-nature-torn.webp)](examples/olive-nature-torn.png) | [![雪山单色印刷：暖白纸、炭灰山脊与少量锈橙线](examples/previews/alpine-mono-print.webp)](examples/alpine-mono-print.png) |
 
-| 蓝米撕纸 | 橄榄绿自然拼贴 |
-|---|---|
-| [![蓝米预览](examples/previews/blue-beige-torn.webp)](examples/blue-beige-torn.png) | [![橄榄绿预览](examples/previews/olive-nature-torn.webp)](examples/olive-nature-torn.png) |
+| 深蓝夜景颗粒 · `cobalt-night-grain` | 留白干刷明信片 · `drybrush-postcard` |
+| --- | --- |
+| [![深蓝夜景颗粒：蓝色照片碎片与粗颗粒印刷质感](examples/previews/cobalt-night-grain.webp)](examples/cobalt-night-grain.png) | [![留白干刷明信片：小幅山湖场景、暖白纸面和手写标注](examples/previews/postcard-only-handwritten.webp)](examples/postcard-only-handwritten.png) |
 
-| 雪山单色印刷 | 深蓝夜景颗粒 |
-|---|---|
-| [![雪山预览](examples/previews/alpine-mono-print.webp)](examples/alpine-mono-print.png) | [![深蓝预览](examples/previews/cobalt-night-grain.webp)](examples/cobalt-night-grain.png) |
+想要大片留白，选 `drybrush-postcard`；想保留照片层次，选两款撕纸配方；想加强印刷表现，选单色或深蓝颗粒。[完整风格配方](skills/photo-collage/references/styles.md)。
 
-## 三步使用
+## 三步开始
 
-1. 下载本仓库。将 `skills/photo-collage` 整个目录复制到 `$CODEX_HOME/skills/`；未设置 `CODEX_HOME` 时放到 `~/.codex/skills/`。如果已存在同名技能，先检查版本，避免直接覆盖。
-2. 重启 Codex 或开启能重新加载技能的新会话。提供你有权编辑的照片，可选附上风格参考。
-3. 直接调用：`用 $photo-collage 把这张照片做成 blue-beige-torn，4:5，保留我的衣服和脸，不加文字。`
-
-其他可选名：`drybrush-postcard`、`olive-nature-torn`、`alpine-mono-print`、`cobalt-night-grain`。也可自然表达“用这张原片做米蓝色撕纸拼贴”；保留默认自动发现，无需修改系统权限。
-
-明信片调用示例：
+1. **安装 Skill。** 下载本仓库，将整个 `skills/photo-collage` 目录复制到 `~/.agents/skills/photo-collage`。保留脚本、参考文档和字体；若已有同名技能，先核对版本和本地修改，避免覆盖。[Codex 技能目录说明](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)。
+2. **提供照片。** 在能发现该技能的新会话中上传你有权编辑的原片，可选附上风格参考。若技能未出现，重启 Codex 后再检查。
+3. **说出你要的风格。** 例如：
 
 ```text
-用 $photo-collage 做 drybrush-postcard，output_mode=postcard_only，不加文字。
-用 $photo-collage 做 drybrush-postcard，output_mode=stacked_original，location=杭州，date=2026.10.03，time=17:30。
+用 $photo-collage 把这张照片做成 blue-beige-torn，竖版 4:5，
+保留我的衣服和脸，不加文字。
 ```
 
-`output_mode` 默认 `postcard_only`；`location`、`date`、`time` 均可省略，省略项不添加。不要猜测地点时间或自动公开 EXIF 信息。文字、拼接和预览由确定性工具后处理；附带的辅助脚本需要已有 Python + Pillow；中文手写字体已随 Skill 附带，中文使用悠哉，英文和数字使用 Caveat，均为明确选择的手写字体，不使用系统回退，缺字时报错。无需给图像工具增加 API key。[后处理步骤与命令](skills/photo-collage/references/postcard-output.md)。
+也可以直接说“用这张原片做米蓝色撕纸拼贴”。需要能接受原片的图像编辑工具；环境缺少该能力时，技能会说明阻塞并交付方案与提示词。
+
+## 明信片两种交付形态
+
+`postcard_only`（默认）交付单独卡片；`stacked_original` 把原片与卡片合为一张图。两种形态均用于 `drybrush-postcard`。
+
+| 单独明信片 | 上原片，下明信片 |
+| --- | --- |
+| <a href="examples/postcard-only-handwritten.png"><img src="examples/previews/postcard-only-handwritten.webp" width="280" alt="单独明信片：暖白卡片和左下手写演示标注"></a> | <a href="examples/postcard-stacked-handwritten.png"><img src="examples/previews/postcard-stacked-handwritten.webp" width="140" alt="上下拼接成片：授权原片在上，带手写标注的生成卡片在下"></a> |
+
+上面的标注为明确传入的演示参数：`location=合成山湖`、`date=2026.10.03`、`time=17:30`，不代表实际拍摄地点或时间。
+
+**手写标注的实际局部**，裁自上面的成片：
+
+[![日期、时间与下一行地点的自然手写标注放大](examples/previews/handwritten-caption-detail.webp)](examples/handwritten-caption-detail.png)
+
+| 参数 | 可选值或行为 |
+| --- | --- |
+| `output_mode` | `postcard_only` 或 `stacked_original`；默认前者 |
+| `location` | 用户原样提供的地点；省略则不添加 |
+| `date`、`time` | 用户原样提供的日期和时间；省略项不添加 |
+| 卡片比例 | 未指定时按竖版 4:5 提示；上下整图比例随原片和卡片尺寸变化 |
+
+```text
+用 $photo-collage 做 drybrush-postcard，
+output_mode=postcard_only，不加文字。
+```
+
+```text
+用 $photo-collage 做 drybrush-postcard，
+output_mode=stacked_original，
+location=杭州，date=2026.10.03，time=17:30。
+```
+
+日期与时间在下卡片左下第一行，地点在下一行。中文使用附带的**悠哉**，英文和数字使用 **Caveat**，保持暖棕色 `#AE7E63`；不使用系统字体回退，缺字或文字放不下时会报错。不会猜测地点、时间或自动公开 EXIF 信息。
+
+排字、上下拼接和预览压缩使用确定性后处理，需要已有 **Python + Pillow**；不安装系统字体，无需额外图像 API key。上下模式保留原片显示朝向和尺寸，只按原片宽度缩放下卡片。原片一致性检查针对无损母版中的 **8 位 RGBA 显示像素**，不代表保留 ICC 配置或高位深归档。[后处理步骤与命令](skills/photo-collage/references/postcard-output.md)。
 
 ## 能力与边界
 
-- 首版处理静态照片。复古调色、裁剪蒙版和纸张叠层本身是传统处理；重绘、补画或生成纹理才涉及生成能力。不能由外观推断某个相机功能的内部实现。
-- 默认走 Codex 内置图像生成/编辑工具，不需要用户配置 API key。本仓库不提供图像模型、CLI 或假的 MCP 命令。运行环境若没有能接受原片的编辑工具，Skill 会说明阻塞并交付提示词，不谎称已生成。
-- 内置图像服务可能联网、闭源或消耗现有额度；本项目不承诺纯离线，也不代表图像服务免费。Skill 不安装 Kapi、不逆向接口、不搬运付费模板、不设置密钥、不自行转传其他第三方。
-- 参考只用于布局、色彩和质感。默认保留原片人物、衣服、姿势和关键物件；不复制参考中的人，也不推断其身份。默认没有文字，社交平台界面会被剔除。
+- **静态照片。** 支持纸张拼贴和印刷风格，不提供实时相机、视频或图像模型。传统调色、裁剪与叠层和生成式重绘应分开理解，不能根据外观推断 Kapi 的内部实现。
+- **工具依赖。** 使用当前 Codex 环境的图像编辑能力，不需要用户配置 API key。图像服务可能联网、闭源或消耗现有额度；本项目不承诺纯离线或服务免费。
+- **人物与参考。** 默认保留原片人物、衣服、姿势和重要物件，参考只用于布局、色彩与质感。生成式编辑可能改变细节，重要纪念照片应逐张检查；不复制参考人物，不保留社交平台 UI，默认不加文字。
+- **素材与原片。** 不安装 Kapi、不逆向接口、不搬运付费模板、不自行转传照片给额外第三方。后处理不覆盖原片；展示用压缩预览，高清母版单独保留。
 
 ## 来源与验证
 
-五种均有实际查看的对应原帖视觉来源，名称是本项目描述名。以下点赞数为 2026-10-03 查看时页面值，不是官方热榜；四种海报原帖明确提到 Codex/Skill，不能统称为 Kapi 原生模板。
+五种名称是本项目提炼的**描述名**，不是 Kapi 官方模板。公开原帖仅作为视觉观察来源；本仓库示例使用合成输入，不发布第三方照片或其衍生图，也不把它们当作五款原帖的同图复现验收。
 
-| 配方 | 实际查看的来源 | 可见点赞 | 输入与输出证据 |
-|---|---|---:|---|
-| 干刷明信片 | [@liu](https://www.douyin.com/search/kapi%E6%8B%BC%E8%B4%B4?modal_id=7685729175148376290&type=general) | 约 5.8 万 | 原图/明信片同屏 |
-| 蓝米撕纸 | [@听见了吗📸](https://www.douyin.com/search/%E8%BF%99%E4%B8%AAskill%E7%9A%84%E5%AE%A1%E7%BE%8E%E6%81%90%E6%80%95%E5%9C%A8%E6%88%91%E4%B9%8B%E4%B8%8A?modal_id=7670548738029557925&type=general) | 约 3.4 万 | 树木成片；未见该主图原片 |
-| 橄榄绿自然 | [@北原千夏](https://www.douyin.com/search/%E7%AC%AC63%E9%9B%86%20%E8%BF%99%E4%B8%AAskill%E7%9A%84%E7%BE%8E%E5%95%86%E6%81%90%E6%80%95%E5%9C%A8%E6%88%91%E4%B9%8B%E4%B8%8A?modal_id=7670916508982356849&type=general) | 约 6.2 万 | 草原、风车与票根成片/原图同屏 |
-| 雪山单色 | [@凌晨奔巴士 v2](https://www.douyin.com/search/%E8%BF%99%E4%B8%AAskill%E7%9A%84%E5%AE%A1%E7%BE%8E%E6%81%90%E6%80%95%E5%9C%A8%E6%88%91%E4%B9%8B%E4%B8%8A?modal_id=7671536283285512817&type=general) | 约 3.5 万 | 雪山原图/印刷成片同屏 |
-| 深蓝颗粒 | [@凌晨奔巴士](https://www.douyin.com/search/%E8%BF%99%E4%B8%AAskill%E7%9A%84%E5%AE%A1%E7%BE%8E%E6%81%90%E6%80%95%E5%9C%A8%E6%88%91%E4%B9%8B%E4%B8%8A?modal_id=7670855844619249529&type=general) | 约 66.6 万 | 深蓝撑伞原图/成片同屏 |
+<details>
+<summary>查看来源、示例生成记录与既有验证证据</summary>
 
-[逐项视觉判断与差距](docs/source-evidence.md)、[配方与来源可靠性](skills/photo-collage/references/styles.md)区分原帖观察、合成输入试跑和同原片复现。蓝米多照片组合、深蓝胶带与小相框是本项目的设计扩展，不称为原帖逐图复刻。这里只链接原帖，不转载其照片。
+- [公开来源逐项观察与差距](docs/source-evidence.md)：区分原帖观察、合成输入试跑与同原片复现；四款海报原帖提到 Codex/Skill，不能统称为 Kapi 原生效果。
+- [示例来源与生成记录](examples/provenance.md)：同一合成输入的实际编辑、修正及后处理记录，不猜测工具未提供的模型版本。
+- [压缩、双模式与原片一致性实测](docs/output-validation.md)：既有示例的尺寸、哈希与压缩体积；文件体积变化不等于所有网络环境的加载速度。
+- [手写标注验证](docs/handwriting-validation.md)及[实际旧字/新字对比](examples/handwriting-before-after.png)：记录字体修正、文字区域和原文核对。
+- [验证记录](docs/validation.md)：结构检查、场景干跑与实际生成的区别，以及尚未验证的范围。
 
-真实作者展示的一组原图/成片已在私下做同图编辑对照，整体印刷感觉相近，仍有画面密度与局部细节差距。第三方输入和衍生图不发布。本仓库的五款示例是合成输入试跑，不能替代五款公开原帖的同图复现验收。
+这些记录说明本次合成演示的结果，不保证跨照片一致性、五官像素保真或自然语言自动发现已在每个环境实测成功。
 
-结构校验和场景干跑会验证缺图、缺工具、UI 排除与输入角色规则。当前会话不能热加载新装技能；已验证文件安装，不把自然语言自动发现写成已实测成功。新会话仍需实际调用确认。生成式编辑也可能改变脸部与衣服细节，重要纪念照片建议逐张检查。
-
-示例包含生成式重绘及少量新增装饰；提示词的尺寸和元素约束不能视为工具必定严格遵守。完整检查结论见 [验证记录](docs/validation.md)。
-
-展示图片由原先六张高清 PNG 的 **18.88 MB** 改为六张整图加一张标注局部预览，合计 **0.82 MB**，减少 **95.68%**。高清文件保留；这只是展示资源体积变化，不能承诺所有网络环境的页面耗时。[压缩、双模式与原片一致性实测](docs/output-validation.md)。
-
-[线上旧字与新手写实际对比](examples/handwriting-before-after.png)。字体修正见 [根因与实测](docs/handwriting-validation.md)：只改文字区域，主体画面、暖棕色和原文保持。
+</details>
 
 ## 许可
 
-本项目原创 Skill 文本和文档使用 [MIT](LICENSE)。示例是本项目通过 Codex 图像工具新生成的演示素材，生成来源记录于 [examples/provenance.md](examples/provenance.md)；它们不属于 Kapi 或抖音作者素材。MIT 不为所调用的图像服务、模型或第三方照片授予许可，使用时仍遵循该服务条款与素材权限。
+原创 Skill 与项目文档使用 [MIT](LICENSE)。公开示例由本项目通过 Codex 图像工具新生成，来源见 [示例记录](examples/provenance.md)；它们不是 Kapi 或抖音作者素材。MIT 不为所调用的图像服务、模型或第三方照片授予许可，使用时仍需遵循服务条款与素材权限。
 
-附带的未修改字体为悠哉 Regular 0.868 和 Caveat 2.000，分别保留完整 [悠哉 OFL](skills/photo-collage/assets/fonts/Yozai-OFL.txt)、[Caveat OFL](skills/photo-collage/assets/fonts/Caveat-OFL.txt)与原版权，均不适用本项目 MIT。来源和哈希见 [字体记录](skills/photo-collage/assets/fonts/provenance.json)。两份字体合计约 16.01 MB，仅随技能下载，README 仍加载图片预览。
+附带的未修改字体为悠哉 Regular 0.868 与 Caveat 2.000，分别保留完整 [悠哉 OFL](skills/photo-collage/assets/fonts/Yozai-OFL.txt)、[Caveat OFL](skills/photo-collage/assets/fonts/Caveat-OFL.txt)和原版权，不按项目 MIT 重新授权。[字体来源、版本与哈希](skills/photo-collage/assets/fonts/provenance.json)。字体只随技能下载，README 不加载字体文件。
